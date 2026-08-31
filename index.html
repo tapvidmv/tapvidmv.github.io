@@ -63,6 +63,13 @@ figure { margin: 1.5rem 0 0; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 figcaption, .caption { font-size: .9rem; color: var(--muted); margin-top: .6rem; }
 .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+ul.contributions { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.15rem; }
+ul.contributions li { padding-left: 1.6rem; position: relative; }
+ul.contributions li::before {
+  content: ""; position: absolute; left: .35rem; top: .62em;
+  width: .45rem; height: .45rem; border-radius: 50%; background: var(--accent);
+}
+ul.contributions b { font-weight: 600; }
 
 /* hero */
 header { padding: 4.5rem 1.25rem 0; max-width: 60rem; margin: 0 auto; text-align: center; }
@@ -128,20 +135,23 @@ pre.bibtex {
 </header>
 
 <main>
-<section id="abstract">
-  <h2>Abstract</h2>
-  <p>Multi-camera systems are increasingly practical for robotics, AR/VR, and autonomous driving because complementary views reduce depth ambiguity and preserve visibility under occlusion. Existing point-tracking benchmarks, however, focus on a single video or static multi-camera rigs. None test long-term 3D point tracking across several synchronized views under camera motion. We introduce <b>TAPVid-MV</b> (Tracking Any Point in Video across Multiple Views), the first benchmark for this setting. It contains a curated set of 284 sequences, 1,142 calibrated camera streams, and 109,769 point tracks across seven subsets spanning indoor and outdoor domains, from robotics and human activity to driving and synthetic procedural scenes.</p>
-  <p>We obtain these trajectories using dataset-specific auxiliary modalities: sensor depth, LiDAR, SLAM and SfM points, human meshes, posed object meshes, and simulation. Every sequence and trajectory is visually verified by human annotators. Across more than 30 baselines, no method comes close to solving the task. Surprisingly, existing multi-view point trackers do not consistently outperform monocular point trackers. By evaluating reconstruction and point tracking on the same datasets, TAPVid-MV helps distinguish errors in recovered geometry from errors in point correspondence. Through this joint analysis, we identify geometry recovery as a major bottleneck for accurate 3D point tracking. Beyond multi-view 3D point tracking, our released annotations support monocular 2D and 3D point tracking, future-trajectory prediction, and 4D reconstruction.</p>
+<section id="overview">
+  <h2>Overview</h2>
+  <ul class="contributions">
+    <li><b>A task that no existing benchmark measures.</b> Given synchronized videos from several <em>moving</em> cameras and one query pixel in one view, a method must predict that point's 3D trajectory in a shared world frame and its visibility in every view. Point-tracking benchmarks so far cover a single video or a static multi-camera rig; TAPVid-MV is the first to test long-term 3D tracking across several views under camera motion.</li>
+    <li><b>284 sequences, 1,142 calibrated camera streams, 109,769 3D point tracks.</b> Seven subsets span the domains where multi-camera capture already happens: robot manipulation (DROID), sporting activities (EgoExo4D), close-contact human interaction (Harmony4D), tabletop object rearrangement (PACE), two-person interaction (Hi4D), driving (Waymo), and procedurally generated indoor scenes (Perpetua). Each scene has three to eight cameras, every subset contains camera motion, and three include egocentric views.</li>
+    <li><b>Ground truth you can check yourself.</b> Each domain is annotated from its most reliable signal — robot kinematics and stereo, fitted human meshes, posed object meshes, LiDAR, or exact synthetic geometry — then automatically filtered and manually inspected in every view. All 284 sequences are published as interactive 3D recordings, so any annotation can be verified without downloading the dataset.</li>
+    <li><b>An evaluation that separates geometry from correspondence.</b> We score tracking in the query view, in the other views, and in world space, and we score the quality of each system's reconstruction on the same sequences. That tells you whether a method's error comes from the geometry it recovered or from the correspondences it predicted — the two are usually confounded.</li>
+    <li><b>More than 30 baselines under one protocol.</b> Six method families, from monocular 2D trackers to joint multi-view 4D models, with every point tracker reading the same shared multi-view reconstruction so differences come from the tracker alone. No method comes close to solving the task, multi-view trackers do not consistently beat monocular ones, and geometry recovery is the dominant bottleneck.</li>
+    <li><b>Training data, and uses beyond this benchmark.</b> We release the procedural Perpetua generator and metric 3D trajectories for 5,371 DROID robot episodes as multi-view training data. The annotations also support monocular 2D and 3D point tracking, future-trajectory prediction, and 4D reconstruction.</li>
+  </ul>
 </section>
 
 <section id="data">
-  <h2>Seven subsets, one protocol</h2>
-  <p>TAPVid-MV covers the domains where multi-camera capture naturally arises: robot manipulation (DROID), egocentric team activity (EgoExo4D), close-contact sports (Harmony4D), tabletop rearrangement (PACE), two-person interaction (Hi4D), driving (Waymo), and procedural indoor scenes (Perpetua). Ground truth comes from each domain's most reliable signal — robot kinematics and stereo, fitted human meshes, posed object meshes, LiDAR, or exact synthetic geometry — and every sequence was manually verified.</p>
   <figure>
-    <img src="assets/splits.jpg" alt="Preview of the seven TAPVid-MV subsets: DROID, EgoExo4D, Harmony4D, PACE, Hi4D, Waymo, and Perpetua, with per-subset camera counts and camera-motion glyphs.">
-    <figcaption>The seven subsets, with per-subset sequence and view counts and the camera motion of each pictured sequence.</figcaption>
+    <img src="assets/splits.jpg" alt="The seven TAPVid-MV subsets — DROID, EgoExo4D, Harmony4D, PACE, Hi4D, Waymo, and Perpetua — each shown as three camera views of one sequence with its camera-motion glyph and size.">
+    <figcaption>The seven subsets. Each column shows three views of one sequence with its ground-truth tracks, and below them the camera trajectories of that sequence (white dots are static cameras, blue paths moving ones), how many of its cameras move, how far they travel, and the size of the subset.</figcaption>
   </figure>
-  <p style="margin-top:1.2rem">The full release is public on Google Cloud Storage: annotations, calibrated cameras, depth, and evaluation manifests at <a class="mono" href="https://storage.googleapis.com/dm-tapnet/mv-tap/pace_file_list.txt">gs://dm-tapnet/mv-tap</a>.</p>
 </section>
 
 <section id="explore">
