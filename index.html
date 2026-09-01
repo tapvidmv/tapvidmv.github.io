@@ -79,7 +79,8 @@ h1 { font-size: clamp(1.3rem, 3vw, 2.05rem); margin: .8rem auto .4rem; max-width
 @media (max-width: 700px) { h1, .subtitle { white-space: normal; } }
 .authors { margin-top: 1.1rem; font-size: 1rem; color: var(--ink); max-width: 44rem; margin-left: auto; margin-right: auto; }
 .authors sup { font-size: .75em; vertical-align: super; line-height: 0; }
-.authors-note { margin: .35rem auto 0; font-size: .85rem; color: var(--muted); }
+.authors a { color: inherit; text-decoration-color: var(--line); }
+.authors a:hover { color: var(--accent-ink); text-decoration-color: currentColor; }
 #tracks-canvas { display: block; width: 100%; max-width: 46rem; height: 90px; margin: 1.6rem auto .4rem; }
 .links { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin-top: 1.4rem; }
 .btn {
@@ -121,8 +122,7 @@ pre.bibtex {
 <header>
   <h1>TAPVid-MV: Tracking Any Point in 3D Across Multiple Views</h1>
   <p class="subtitle">The first benchmark for long-term 3D point tracking across several synchronized, moving cameras.</p>
-  <p class="authors">Skanda Koppula<sup>*</sup>, Frano Rajič<sup>*</sup>, Abdullah Faiz Ur Rahman, Yi Yang, Ignacio Rocco, Jeet Thakwani, Rishabh Kabra, Andrew Zisserman, Joao Carreira, Siyu Tang, Carl Doersch, Gabriel Brostow</p>
-  <p class="authors-note"><sup>*</sup>Equal contribution</p>
+  <p class="authors"><a href="https://skoppula.com/">Skanda Koppula</a><sup>*</sup>, <a href="https://m43.github.io/">Frano Rajič</a><sup>*</sup>, Abdullah Faiz Ur Rahman, Yi Yang, Ignacio Rocco, Jeet Thakwani, Rishabh Kabra, Andrew Zisserman, Joao Carreira, Siyu Tang, Carl Doersch, Gabriel Brostow</p>
   <canvas id="tracks-canvas" width="1104" height="216" aria-hidden="true"></canvas>
   <nav class="links" aria-label="Resources">
     <span class="btn soon">Paper — soon</span>
