@@ -71,6 +71,10 @@ ul.contributions li::before {
 }
 ul.contributions b { font-weight: 600; }
 ul.contributions .detail { display: block; color: var(--muted); font-size: 1.05rem; margin-top: .15rem; }
+ul.sources { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem;
+             grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+ul.sources li { display: flex; align-items: baseline; gap: .5rem; }
+ul.sources .detail { color: var(--muted); font-size: .9rem; }
 
 /* hero */
 header { padding: 4.5rem 1.25rem 0; max-width: 60rem; margin: 0 auto; text-align: center; }
@@ -181,6 +185,19 @@ pre.bibtex {
   author  = {Skanda Koppula and Frano Raji{\v{c}} and Abdullah Faiz Ur Rahman and Yi Yang and Ignacio Rocco and Jeet Thakwani and Rishabh Kabra and Andrew Zisserman and Joao Carreira and Siyu Tang and Carl Doersch and Gabriel Brostow},
   year    = {2026}
 }</pre>
+</section>
+
+<section id="citing-subsets">
+  <h2>Citing the source datasets</h2>
+  <p>TAPVid-MV is built on six existing datasets, whose authors made this benchmark possible. If you use a subset, please cite the dataset it comes from alongside this work:</p>
+  <ul class="sources">
+    <li><a href="https://arxiv.org/abs/2403.12945">DROID</a> <span class="detail">robot manipulation</span></li>
+    <li><a href="https://arxiv.org/abs/2311.18259">Ego-Exo4D</a> <span class="detail">sporting activities</span></li>
+    <li><a href="https://arxiv.org/abs/2410.20294">Harmony4D</a> <span class="detail">close human interaction</span></li>
+    <li><a href="https://arxiv.org/abs/2312.15130">PACE</a> <span class="detail">tabletop objects</span></li>
+    <li><a href="https://arxiv.org/abs/2303.15380">Hi4D</a> <span class="detail">two-person interaction</span></li>
+    <li><a href="https://arxiv.org/abs/1912.04838">Waymo Open Dataset</a> <span class="detail">driving</span></li>
+  </ul>
 </section>
 </main>
 
