@@ -90,12 +90,6 @@ h1 { font-size: clamp(1.3rem, 3vw, 2.05rem); margin: .8rem auto .4rem; max-width
 .btn.soon { background: transparent; color: var(--muted); border: 1px solid var(--line); cursor: default; }
 .btn:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-/* stats strip */
-.stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.2rem; margin: 2.6rem auto 0; padding: 1.1rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); max-width: 52rem; }
-.stat { text-align: center; }
-.stat b { display: block; font-family: "IBM Plex Mono", monospace; font-size: 1.35rem; font-weight: 600; font-variant-numeric: tabular-nums; }
-.stat span { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-
 /* viewer */
 .viewer { position: relative; margin-top: 1.5rem; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--card); }
 .viewer iframe { display: block; width: 100%; height: 620px; border: 0; }
@@ -133,13 +127,6 @@ pre.bibtex {
     <a class="btn" href="#bibtex">BibTeX</a>
     <span class="btn soon">Code — soon</span>
   </nav>
-  <div class="stats">
-    <div class="stat"><b>284</b><span>sequences</span></div>
-    <div class="stat"><b>1,142</b><span>camera streams</span></div>
-    <div class="stat"><b>109,769</b><span>3D point tracks</span></div>
-    <div class="stat"><b>7</b><span>subsets</span></div>
-    <div class="stat"><b>30+</b><span>baselines</span></div>
-  </div>
 </header>
 
 <main>
@@ -148,9 +135,9 @@ pre.bibtex {
   <ul class="contributions">
     <li><b>The first benchmark for 3D point tracking across several moving cameras.</b><span class="detail">Track a query point through synchronized views, in one shared world frame.</span></li>
     <li><b>284 sequences, 1,142 calibrated camera streams, 109,769 3D tracks.</b><span class="detail">Seven subsets, from robot manipulation and driving to two-person interaction and synthetic scenes.</span></li>
-    <li><b>Ground truth you can check yourself.</b><span class="detail">Every sequence is manually verified and published as an interactive 3D recording.</span></li>
+    <li><b>Ground truth you can easily view yourself.</b><span class="detail">Every sequence is manually verified and published as an interactive 3D recording.</span></li>
     <li><b>Geometry and correspondence, scored separately.</b><span class="detail">We evaluate reconstruction quality and tracking accuracy on the same sequences.</span></li>
-    <li><b>Over 30 baselines under one protocol.</b><span class="detail">No method comes close, and multi-view trackers do not consistently beat monocular ones.</span></li>
+    <li><b>Over 30 baselines under one protocol, but the task remains unsolved.</b><span class="detail">No method comes close, and multi-view trackers do not consistently beat monocular ones.</span></li>
     <li><b>Training data included.</b><span class="detail">The Perpetua generator and metric 3D trajectories for 5,371 robot episodes ship with the benchmark.</span></li>
   </ul>
 </section>
