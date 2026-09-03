@@ -130,7 +130,7 @@ pre.bibtex {
   <canvas id="tracks-canvas" width="1104" height="216" aria-hidden="true"></canvas>
   <nav class="links" aria-label="Resources">
     <span class="btn soon">Paper — soon</span>
-    <a class="btn" href="https://storage.googleapis.com/dm-tapnet/mv-tap/rrd/index.html">Explore every sequence</a>
+    <a class="btn" href="https://storage.googleapis.com/dm-tapnet/tapvidmv/rrd/index.html">Explore every sequence</a>
     <span class="btn soon">Data — soon</span>
     <a class="btn" href="#bibtex">BibTeX</a>
     <span class="btn soon">Code — soon</span>
@@ -159,7 +159,7 @@ pre.bibtex {
 
 <section id="explore">
   <h2>Inspect any sequence in 3D</h2>
-  <p>Every one of the 284 sequences is released as a Rerun recording — multi-view RGB, colored point cloud, ground-truth 3D tracks, and camera frusta. Pick one below, or browse the <a href="https://storage.googleapis.com/dm-tapnet/mv-tap/rrd/index.html">full index</a>.</p>
+  <p>Every one of the 284 sequences is released as a Rerun recording — multi-view RGB, colored point cloud, ground-truth 3D tracks, and camera frusta. Pick one below, or browse the <a href="https://storage.googleapis.com/dm-tapnet/tapvidmv/rrd/index.html">full index</a>.</p>
   <div class="picker">
     <label>Subset <select id="pick-split"></select></label>
     <label>Sequence <select id="pick-seq"></select></label>
@@ -169,7 +169,7 @@ pre.bibtex {
   <div class="viewer" id="viewer">
     <div class="viewer-idle" id="viewer-idle">
       <b>Choose a sequence and press Load</b>
-      <span class="mono">the viewer streams the recording from the release bucket</span>
+      <span class="mono" id="viewer-note">the viewer streams the recording from the release bucket</span>
     </div>
   </div>
 </section>
@@ -203,7 +203,7 @@ pre.bibtex {
 
 <footer>
   TAPVid-MV · data released under the licenses of the respective source datasets ·
-  <a href="https://storage.googleapis.com/dm-tapnet/mv-tap/rrd/index.html">sequence visualizations</a>
+  <a href="https://storage.googleapis.com/dm-tapnet/tapvidmv/rrd/index.html">sequence visualizations</a>
 </footer>
 
 <script>
@@ -309,11 +309,26 @@ pre.bibtex {
   if (start[1]) seqSel.value = start[1];
   showMeta();
 
-  loadBtn.addEventListener("click", function () {
-    var url = "https://storage.googleapis.com/dm-tapnet/mv-tap/rrd/" +
+  function viewerUrl() {
+    var rrd = "https://storage.googleapis.com/dm-tapnet/tapvidmv/rrd/" +
       splitSel.value + "/" + seqSel.value.split("/").map(encodeURIComponent).join("/") + ".rrd";
+    return "https://app.rerun.io/version/0.35.0/index.html?url=" + encodeURIComponent(rrd);
+  }
+  // The embedded viewer renders blank in Safari (the Rerun web viewer needs
+  // WebGPU there; see rerun-io/rerun#10609), so Safari opens it in a new tab.
+  var isSafari = /safari/i.test(navigator.userAgent) && !/chrome|chromium|android|edg\//i.test(navigator.userAgent);
+  if (isSafari) {
+    loadBtn.textContent = "Open viewer in a new tab";
+    var note = document.getElementById("viewer-note");
+    if (note) note.textContent = "the embedded viewer needs Chrome, Edge, or Firefox; in Safari the recording opens in a new tab";
+  }
+  loadBtn.addEventListener("click", function () {
+    if (isSafari) {
+      window.open(viewerUrl(), "_blank", "noopener");
+      return;
+    }
     var iframe = document.createElement("iframe");
-    iframe.src = "https://app.rerun.io/version/0.35.0/index.html?url=" + encodeURIComponent(url);
+    iframe.src = viewerUrl();
     iframe.title = "Rerun viewer: " + splitSel.value + "/" + seqSel.value;
     iframe.allow = "fullscreen";
     var viewer = document.getElementById("viewer");
