@@ -1,0 +1,229 @@
+WEBVTT
+
+1
+00:00:01.500 --> 00:00:02.500
+Pick a point.
+
+2
+00:00:03.060 --> 00:00:04.060
+Any point.
+
+3
+00:00:04.260 --> 00:00:06.500
+Say, the tip of a robot's gripper.
+
+4
+00:00:07.460 --> 00:00:08.640
+Now, follow it.
+
+5
+00:00:09.180 --> 00:00:10.180
+Through time.
+
+6
+00:00:10.380 --> 00:00:11.380
+Through space.
+
+7
+00:00:11.620 --> 00:00:13.140
+And through every camera that's watching.
+
+8
+00:00:14.100 --> 00:00:17.220
+More and more machines see the world through several cameras at once.
+
+9
+00:00:17.760 --> 00:00:18.760
+Robots.
+
+10
+00:00:18.700 --> 00:00:19.700
+Cars.
+
+11
+00:00:19.500 --> 00:00:20.500
+Headsets.
+
+12
+00:00:20.780 --> 00:00:22.980
+With one camera, depth is a guess.
+
+13
+00:00:23.720 --> 00:00:26.340
+Add a second, and the guess becomes geometry.
+
+14
+00:00:27.060 --> 00:00:30.460
+Add more, and a point hidden in one view stays visible in another.
+
+15
+00:00:31.300 --> 00:00:36.260
+So how well do today's models track points in 3D, across many moving cameras?
+
+16
+00:00:37.160 --> 00:00:39.340
+Until now, nobody could say.
+
+17
+00:00:40.020 --> 00:00:43.600
+Benchmarks only tested a single video, or cameras bolted in place.
+
+18
+00:00:44.300 --> 00:00:48.840
+Meet TAPVid-MV, tracking any point in video across
+
+19
+00:00:48.840 --> 00:00:54.580
+multiple views, 284 sequences, more than 1,100 calibrated
+
+20
+00:00:54.580 --> 00:00:59.300
+camera streams and nearly 110,000 3D point tracks.
+
+21
+00:01:00.200 --> 00:01:02.020
+They span seven worlds.
+
+22
+00:01:02.820 --> 00:01:07.860
+Robot arms in DROID, soccer in Ego-Exo4D, sword
+
+23
+00:01:07.860 --> 00:01:12.080
+fights and ballroom dancing in Harmony4D, cluttered tabletops in
+
+24
+00:01:12.080 --> 00:01:16.160
+PACE, hugs and high-fives in Hi4D, city
+
+25
+00:01:16.160 --> 00:01:20.840
+streets in Waymo, and Perpetua, our own procedurally generated homes.
+
+26
+00:01:21.800 --> 00:01:25.000
+People can't hand-label 3D paths, so we
+
+27
+00:01:25.000 --> 00:01:28.800
+build them from depth sensors, LiDAR, meshes, and simulation,
+
+28
+00:01:29.380 --> 00:01:31.720
+and then a person checks every single one.
+
+29
+00:01:32.600 --> 00:01:33.600
+The task.
+
+30
+00:01:33.960 --> 00:01:34.960
+You get the videos.
+
+31
+00:01:35.720 --> 00:01:36.720
+No depth.
+
+32
+00:01:36.840 --> 00:01:37.840
+No camera poses.
+
+33
+00:01:38.820 --> 00:01:39.820
+Just one point.
+
+34
+00:01:40.160 --> 00:01:42.340
+Clicked in one camera at one moment.
+
+35
+00:01:43.060 --> 00:01:44.900
+Recover its whole 3D path.
+
+36
+00:01:45.500 --> 00:01:50.060
+In the clicked camera, in every other camera, and in one shared world.
+
+37
+00:01:50.060 --> 00:01:53.220
+Scoring all three shows exactly where a method breaks.
+
+38
+00:01:54.300 --> 00:01:56.300
+We tested more than 30 methods.
+
+39
+00:01:57.140 --> 00:01:58.140
+Nothing comes close.
+
+40
+00:01:58.660 --> 00:02:01.560
+The best system scores about 25 out of 100.
+
+41
+00:02:02.260 --> 00:02:04.580
+On driving, none gets past seven.
+
+42
+00:02:05.580 --> 00:02:06.800
+Then, a surprise.
+
+43
+00:02:07.520 --> 00:02:09.620
+Trackers built for many views don't reliably beat
+
+44
+00:02:09.620 --> 00:02:11.580
+trackers that watch one video at a time.
+
+45
+00:02:12.340 --> 00:02:13.480
+So where's the weak link?
+
+46
+00:02:14.200 --> 00:02:15.200
+Geometry.
+
+47
+00:02:15.440 --> 00:02:18.520
+Give a tracker better 3D geometry, same
+
+48
+00:02:18.520 --> 00:02:21.320
+weights, and its accuracy more than doubles.
+
+49
+00:02:21.320 --> 00:02:24.500
+Give one perfect depth, and it nearly triples.
+
+50
+00:02:25.380 --> 00:02:28.820
+And switch to a camera nobody clicked in, and the points get lost.
+
+51
+00:02:29.600 --> 00:02:34.100
+Because TAPVid-MV scores reconstruction and tracking on the same data,
+
+52
+00:02:34.500 --> 00:02:38.260
+it shows you whether to fix your geometry or your correspondence.
+
+53
+00:02:39.180 --> 00:02:44.000
+It's also ready for 2D and 3D tracking, forecasting, and 4D reconstruction.
+
+54
+00:02:44.780 --> 00:02:48.620
+We're releasing the benchmark, baselines, code, the Perpetua
+
+55
+00:02:48.620 --> 00:02:53.080
+generator, and 3D tracks for 5,000 robot episodes.
+
+56
+00:02:54.040 --> 00:02:57.140
+Explore every sequence in 3D, right in your browser.
+
+57
+00:02:57.880 --> 00:03:02.140
+So, pick a point, and see how far you can follow it.
